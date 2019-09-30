@@ -9,17 +9,20 @@ module.exports = {
 	port:8081,
 	routes:  [
 		{
-			path:"books",
+			path:"local-service",
 			port:"3001"
 		},
 		{
-			path:"remote-books", 
+			path:"remote-service-with-port", 
+			server:"http://remotehost",
+			port:"3002"
+		},
+		{
+			path:"remote-service-without-port", 
 			server:"http://remotehost"
 		},
 		{
-			path:"custombooks",
-			port:"3001",
-			server:"http://localhost",
+			path:"custom-service", 
 			remotePath:"138.23.44.2"
 		}
 	]
