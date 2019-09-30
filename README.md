@@ -4,6 +4,7 @@ A simple API gateway / reverse proxy, which can be used along with microservices
 Sample configuration in config.js
 
 
+```javascript
 module.exports = {
 	port:8081,
 	routes:  [
@@ -24,7 +25,7 @@ module.exports = {
 	]
 
 }
-
+```
 
 
 Send me a thank you mail if you are using this ;) 
