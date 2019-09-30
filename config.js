@@ -1,9 +1,3 @@
-# api-gateway
-A simple API gateway / reverse proxy, which can be used along with microservices / apis in NodeJS
-
-Sample configuration in config.js
-
-
 module.exports = {
 	port:8081,
 	routes:  [
@@ -24,9 +18,3 @@ module.exports = {
 	]
 
 }
-
-
-
-Send me a thank you mail if you are using this ;) 
-Reach me @: jinujosephdaniel@gmail.com
-
