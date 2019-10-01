@@ -21,11 +21,23 @@ if(!configs) {
 
 console.log("Starting api gateway server at port "+PORT);
 
-
+function registerRoute(app,path,server) {
+    console.log("Registering route :  "+path+" --> "+server );
+    app.all(path, function(req, res) { 
+        console.log("Forwarding request at path :  "+path+"  ---> "+server );
+        console.log("---> ");
+        try {
+             proxy.web(req, res, {target: server}); 
+        } catch(error) {
+            console.log("Error occured");
+            console.log(error);
+        }
+    });
+}
 var i = 0;
 var ln  = configs.length;
 var config = null;
-var server = null;
+var server = null; 
 while(i<ln) {
     config = configs[i];
     path = config.path;
@@ -33,18 +45,12 @@ while(i<ln) {
     port = config.port?config.port:""; 
     server = !config.server?"http://localhost":config.server;
     if(port)
-        server = server+":"+port;
-
-        
-    server = !config.remotePath?server:config.remotePath;
-
-    path = "/"+path+"/*";
-    console.log("Registering route :  "+path+" --> "+server );
-    app.all(path, function(req, res) { 
-        console.log("Forwarding request at path :  "+path+"  ---> "+server );
-        console.log("---> ");
-        proxy.web(req, res, {target: server});
-    });
+        server = server+":"+port; 
+    server = !config.remotePath?server:config.remotePath; 
+    path = "/"+path; 
+    registerRoute(app,path,server);
+    path = path+"/*"; 
+    registerRoute(app,path,server);
     i++;
 } 
 
