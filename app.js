@@ -32,7 +32,10 @@ while(i<ln) {
     if(!path) continue;
     port = config.port?config.port:""; 
     server = !config.server?"http://localhost":config.server;
-    server = server+":"+port;
+    if(port)
+        server = server+":"+port;
+
+        
     server = !config.remotePath?server:config.remotePath;
 
     path = "/"+path+"/*";
